@@ -1,11 +1,16 @@
     function Union(A, B) {
         var res = [];
         for (var i = 0; i < A.length; i++) {
-            res[i] = A[i]j
+            res[i] = A[i];
         }
-        for (var i = A.length; i < A.length + B.length; i++) {
-            for (var j = 0; j < B.length; i++)
-            res [i] = B[j];
+        var j = 0;
+        while (j < B.length) {
+            for (var k = 0; k < res.length; k++) {
+                if (A[A.length+j] != B[j]) {
+                    res [res.length + 1] = B[j];
+                }
+            }
+            j++;
         }
         return "Результат объединения множеств" + res;
     }
