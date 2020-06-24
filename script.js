@@ -21,20 +21,25 @@
 function validate(array) {
     var res = true;
     var str = "";
+
     for (var i = 0; i < array.length; i++) {
-      if (
-        array[i][0] % 2 != 0 &&
-        array[i][1] % 2 == 0 &&
-        array[i][2] % 2 == 0 &&
-        array[i][3] % 2 != 0 &&
-        array[i].length > 4
-      ) {
-        str += "Ошибка в " + i + " элементе\n";
-        res = false;
-      }
+        if (
+        array[i][0] % 2 == 0 &&
+        array[i][1] % 2 != 0 &&
+        array[i][2] % 2 != 0 &&
+        array[i][3] % 2 == 0 &&
+        array[i].length == 4
+        ) {
+            return array;
+        }
+        else {
+            res = false;
+            i += 1;
+            str += "Ошибка в " + i + " элементе\n";
+            alert(str);
+        }
     }
-    if (!res) alert(str);
-    return res;
+    
 }
 
 function getDataUser() {
