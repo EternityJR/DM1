@@ -6,8 +6,8 @@
         var j = 0;
         while (j < B.length) {
             for (var k = 0; k < res.length; k++) {
-                if (A[A.length+j] != B[j]) {
-                    res [res.length + 1] = B[j];
+                if (res[k] != B[j]) {
+                    res[res.length + 1] = B[j];
                 }
             }
             j++;
