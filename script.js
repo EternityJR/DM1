@@ -10,39 +10,33 @@
 function validate(array) {
     var res = true;
     var str = "";
-
     for (var i = 0; i < array.length; i++) {
-        if (
-        array[i][0] % 2 == 0 &&
-        array[i][1] % 2 != 0 &&
-        array[i][2] % 2 != 0 &&
-        array[i][3] % 2 == 0 &&
+        if (parseInt(array[i][0]) % 2 == 0 &&
+        parseInt(array[i][1]) % 2 != 0 &&
+        parseInt(array[i][2]) % 2 != 0 &&
+        parseInt(array[i][3]) % 2 == 0 &&
         array[i].length == 4
         ) {
-            return array;
+
         }
         else {
             res = false;
-            i += 1;
-            str += "Ошибка в " + i + " элементе\n";
+            var k = i + 1;
+            str += "Ошибка в " + k + " элементе\n";
             alert(str);
         }
     }
-    
+    return res;
 }
 
 function getDataUser(func) {
     var A = document.getElementById("arrayA").value;
     A = A.split(" ");
     if (!validate(A)) return;
-
+    
     var B = document.getElementById("arrayB").value;
     B = B.split(" ");
     if (!validate(B)) return;
-
-    var U = document.getElementById("arrayU").value;
-    U = U.split(" ");
-    if (!validate(U)) return;
 
     if (func == 1)
       document.getElementById("result").innerHTML = Union(A, B);
@@ -150,5 +144,7 @@ function getDataUser(func) {
     *return res
     */
     function Negating(A, U) {
-        
+        var U = document.getElementById("arrayU").value;
+        U = U.split(" ");
+        if (!validate(U)) return;
     }
