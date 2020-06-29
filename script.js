@@ -10,6 +10,7 @@
 function validate(array) {
     var res = true;
     var str = "";
+    if (array == "") return alert("Элементы не введены");
     for (var i = 0; i < array.length; i++) {
         if (parseInt(array[i][0]) % 2 == 0 &&
         parseInt(array[i][1]) % 2 != 0 &&
@@ -36,7 +37,12 @@ function getDataUser(func) {
     
     var B = document.getElementById("arrayB").value;
     B = B.split(" ");
-    if (!validate(B)) return;
+    if (func != 5) {
+        if (!validate(B)) return;
+    }
+
+    var U = document.getElementById("arrayU").value;
+    U = U.split(" ");
 
     if (func == 1)
       document.getElementById("result").innerHTML = Union(A, B);
@@ -46,7 +52,7 @@ function getDataUser(func) {
       document.getElementById("result").innerHTML = Addition(A, B);
     else if (func == 4)
       document.getElementById("result").innerHTML = Difference(A, B);
-    else
+    else 
       document.getElementById("result").innerHTML = Negating(A, U);
 }
 
@@ -92,12 +98,17 @@ function getDataUser(func) {
     function Intersection(A, B) {
         var res = [];
         for (var i = 0; i < A.length; i++) {
+            var check = false;
             for (var j = 0; j < B.length; j++) {
-                if (A[i] != B[j]){
-                    res[i] = A[i];
+                if (A[i] == B[j]){
+                    check = true;
                 }
             }
+            if (check == true) {
+                res[res.length] = A[i];
+            }
         }
+        if (res == "") return "Не было найдено";
         return "Результат пересечения множеств: " + res;
     }
 
@@ -111,6 +122,21 @@ function getDataUser(func) {
     *return res
     */
     function Addition(A, B) {
+        var res = A;
+        var i = 0;
+        while (i < B.length) {
+            var check = false;
+            for (var k = 0; k < res.length; k++) {
+                if (res[k] == B[i]) {
+                    check = true;
+                }
+            }
+            if (check == false) {
+                res[res.length] = B[i];
+            }
+            i++;
+        }
+        return "Результат дополнения: " + res;
       
     }
 
@@ -124,13 +150,43 @@ function getDataUser(func) {
     *return res
     */
     function Difference(A, B) {
-
-        var diff=[];
-        for (var i=0; i < A.length; i++) {
-            if (B.indexOf(A[i]) <= -1 ) { 
-                result.push(A[i]);
+        var res1 = [];
+        for (var i = 0; i < A.length; i++) {
+            res1[i] = A[i];
+        }
+        var j = 0;
+        while (j < B.length) {
+            var check = false;
+            for (var k = 0; k < res1.length; k++) {
+                if (res1[k] == B[j]) {
+                    check = true;
+                }
+            }
+            if (check == false) {
+                res1[res1.length] = B[j];
+            }
+            j++;
+        }
+        var res2=[];
+        for (var i = 0; i < A.length; i++) {
+            var check = false;
+            for (var j = 0; j < B.length; j++) {
+                if (A[i] == B[j]){
+                    check = true;
+                }
+            }
+            if (check == true) {
+                res2[res2.length] = A[i];
             }
         }
+
+        var diff=[];
+        for (var i=0; i < res1.length; i++) {
+            if (res2.indexOf(res1[i]) <= -1 ) { 
+                diff.push(res1[i]);
+            }
+        }
+        if (diff == "") return "Не было найдено";
         return "Результат симметрической разности:" + diff;
     }
 
@@ -144,7 +200,15 @@ function getDataUser(func) {
     *return res
     */
     function Negating(A, U) {
-        var U = document.getElementById("arrayU").value;
-        U = U.split(" ");
+
         if (!validate(U)) return;
+
+        var diff=[];
+        for (var i=0; i < U.length; i++) {
+            if (A.indexOf(U[i]) <= -1 ) { 
+                diff.push(U[i]);
+            }
+        }
+        if (diff == "") return "Не было найдено";
+        return "Результат отрицания:" + diff;
     }
