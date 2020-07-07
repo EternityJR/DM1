@@ -1,67 +1,75 @@
-/*
-    *проверка на соответствие типа
-    *
-    *проверка каждого символа на соответствие
-    *
-    *@глобальные переменные res, str
-    *@param array
-    *return res
-*/
-function validate(array) {
-    var res = true;
-    var str = "";
-    if (array == "") return alert("Элементы не введены");
-    for (var i = 0; i < array.length; i++) {
-        if (parseInt(array[i][0]) % 2 == 0 &&
-        parseInt(array[i][1]) % 2 != 0 &&
-        parseInt(array[i][2]) % 2 != 0 &&
-        parseInt(array[i][3]) % 2 == 0 &&
-        array[i].length == 4
-        ) {
+    /*
+        *проверка на соответствие типа
+        *
+        *проверка каждого символа на соответствие
+        *
+        *@лобальные переменные res, str
+        *@param array
+        *return res
+    */
+    function validate(array) {
+        var res = true;
+        var str = "";
+        if (array == "") return alert("Элементы не введены");
+        for (var i = 0; i < array.length; i++) {
+            if (parseInt(array[i][0]) % 2 == 0 &&
+            parseInt(array[i][1]) % 2 != 0 &&
+            parseInt(array[i][2]) % 2 != 0 &&
+            parseInt(array[i][3]) % 2 == 0 &&
+            array[i].length == 4
+            ) {
 
+            }
+            else {
+                res = false;
+                var k = i + 1;
+                str += "Ошибка в " + k + " элементе\n";
+                alert(str);
+            }
         }
-        else {
-            res = false;
-            var k = i + 1;
-            str += "Ошибка в " + k + " элементе\n";
-            alert(str);
-        }
-    }
-    return res;
-}
-
-function getDataUser(func) {
-    var A = document.getElementById("arrayA").value;
-    A = A.split(" ");
-    if (!validate(A)) return;
-    
-    var B = document.getElementById("arrayB").value;
-    B = B.split(" ");
-    if (func != 5) {
-        if (!validate(B)) return;
+        return res;
     }
 
-    var U = document.getElementById("arrayU").value;
-    U = U.split(" ");
+    /*
+    * Получение данных и их валидация
+    *
+    * Преобразует данные из строки в массив и проверяет на правильность
+    *
+    *@локальные переменные A, B, U
+    *@param func
+    */
+    function getDataUser(func) {
+        var A = document.getElementById("arrayA").value;
+        A = A.split(" ");
+        if (!validate(A)) return;
+        
+        var B = document.getElementById("arrayB").value;
+        B = B.split(" ");
+        if (func != 5) {
+            if (!validate(B)) return;
+        }
 
-    if (func == 1)
-      document.getElementById("result").innerHTML = Union(A, B);
-    else if (func == 2)
-      document.getElementById("result").innerHTML = Intersection(A, B);
-    else if (func == 3)
-      document.getElementById("result").innerHTML = Addition(A, B);
-    else if (func == 4)
-      document.getElementById("result").innerHTML = Difference(A, B);
-    else 
-      document.getElementById("result").innerHTML = Negating(A, U);
-}
+        var U = document.getElementById("arrayU").value;
+        U = U.split(" ");
+
+        if (func == 1)
+        document.getElementById("result").innerHTML = Union(A, B);
+        else if (func == 2)
+        document.getElementById("result").innerHTML = Intersection(A, B);
+        else if (func == 3)
+        document.getElementById("result").innerHTML = Addition(A, B);
+        else if (func == 4)
+        document.getElementById("result").innerHTML = Difference(A, B);
+        else 
+        document.getElementById("result").innerHTML = Negating(A, U);
+    }
 
     /*
     *объединение множеств
     *
     *вывод всех уникальных значений из обоих множеств
     *
-    *@глобальные переменные 
+    *@локальные переменные res, check
     *@param A, B
     *return res
     */
@@ -91,7 +99,7 @@ function getDataUser(func) {
     *
     *вывод всех уникальных значений, которые встречаются одновременно в двух заданных множествах
     *
-    *@глобальные переменные 
+    *@локальные переменные res, check
     *@param A, B
     *return res
     */
@@ -115,9 +123,9 @@ function getDataUser(func) {
     /*
     *дополнение множеств
     *
-    *вывод всех уникальных значений из множества A и значений из множества B, которые ещё не встречались
+    *вывод всех уникальных значений из множества A, которые не встречаются в множестве B
     *
-    *@глобальные переменные 
+    *@локальные переменные res, check
     *@param A, B
     *return res
     */
@@ -127,7 +135,7 @@ function getDataUser(func) {
         while (j < A.length) {
             var check = false;
             for (var k = 0; k < B.length; k++) {
-                if (A[k] == B[j]) {
+                if (A[j] == B[k]) {
                     check = true;
                 }
             }
@@ -138,7 +146,6 @@ function getDataUser(func) {
         }
         if (res == "") return "Элементы множеств совпадают";
         return "Результат дополнения: " + res;
-      
     }
 
     /*
@@ -146,9 +153,9 @@ function getDataUser(func) {
     *
     *вывод всех уникальных значений из множеств A и B, кроме тех, что встречаются в обоих
     *
-    *@глобальные переменные 
+    *@локальные переменные res1, res2, check, diff
     *@param A, B
-    *return res
+    *return diff
     */
     function Difference(A, B) {
         var res1 = [];
@@ -196,9 +203,9 @@ function getDataUser(func) {
     *
     *вывод всех значений, которые входят в универсальное множество U, кроме тех, что входят в множество А
     *
-    *@глобальные переменные 
+    *@локальные переменные diff
     *@param A, U
-    *return res
+    *return diff
     */
     function Negating(A, U) {
 
