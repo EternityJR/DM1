@@ -122,20 +122,21 @@ function getDataUser(func) {
     *return res
     */
     function Addition(A, B) {
-        var res = A;
-        var i = 0;
-        while (i < B.length) {
+        var res = [];
+        var j = 0;
+        while (j < A.length) {
             var check = false;
-            for (var k = 0; k < res.length; k++) {
-                if (res[k] == B[i]) {
+            for (var k = 0; k < B.length; k++) {
+                if (A[k] == B[j]) {
                     check = true;
                 }
             }
             if (check == false) {
-                res[res.length] = B[i];
+                res[res.length] = A[j];
             }
-            i++;
+            j++;
         }
+        if (res == "") return "Элементы множеств совпадают";
         return "Результат дополнения: " + res;
       
     }
